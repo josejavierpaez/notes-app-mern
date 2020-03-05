@@ -14,7 +14,7 @@ users.createUser = (req, res) => {
 
 users.deleteUser = (req, res) => {
   return new Promise((resolve, reject) => {
-    reject("delete user");
+    resolve("delete user");
   });
 };
 
