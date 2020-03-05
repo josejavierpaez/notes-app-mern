@@ -8,9 +8,13 @@ const {
 } = require("../controllers/usersControllers");
 
 router.route("/").get((req, res) => {
-  getUsers().then(users => {
-    response.success(req, res, users, 201);
-  });
+  getUsers()
+    .then(users => {
+      response.success(req, res, users, 201);
+    })
+    .catch(error => {
+      response.error(req, res, error, 500, "error into controller");
+    });
 });
 
 router
