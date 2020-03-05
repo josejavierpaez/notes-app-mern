@@ -1,15 +1,21 @@
 const users = {};
 
 users.getUsers = (req, res) => {
-  res.json({ message: "get user" });
+  return new Promise((resolve, reject) => {
+    resolve("get user");
+  });
 };
 
 users.createUser = (req, res) => {
-  res.json({ message: "create user" });
+  return new Promise((resolve, reject) => {
+    resolve("create user");
+  });
 };
 
 users.deleteUser = (req, res) => {
-  res.json({ message: "delete user" });
+  return new Promise((resolve, reject) => {
+    reject("delete user");
+  });
 };
 
 module.exports = users;

@@ -1,23 +1,33 @@
 const notes = {};
 
 notes.getNotes = (req, res) => {
-  res.json({ message: "get request" });
+  return new Promise((resolve, reject) => {
+    resolve("get notes");
+  });
 };
 
 notes.getNote = (req, res) => {
-  res.json({ message: "get request" });
+  return new Promise((resolve, reject) => {
+    resolve("get note");
+  });
 };
 
 notes.createNote = (req, res) => {
-  res.json({ message: "create note" });
+  return new Promise((resolve, reject) => {
+    resolve("create note");
+  });
 };
 
 notes.updateNote = (req, res) => {
-  res.json({ message: "update note" });
+  return new Promise((resolve, reject) => {
+    resolve("update note");
+  });
 };
 
 notes.deleteNote = (req, res) => {
-  res.json({ message: "delete note" });
+  return new Promise((resolve, reject) => {
+    resolve("delete note");
+  });
 };
 
 module.exports = notes;
