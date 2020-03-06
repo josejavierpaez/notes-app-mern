@@ -1,23 +1,45 @@
 const notes = {};
+const notesModel = require("../models/Note");
 
 notes.getNotes = (req, res) => {
   return new Promise((resolve, reject) => {
-    resolve("get notes");
+    try {
+      const notes = notesModel.find();
+      resolve(notes);
+    } catch (error) {
+      reject(error);
+    }
   });
 };
 
 notes.getNote = (req, res) => {
   return new Promise((resolve, reject) => {
-    resolve("get note");
+    console.log(req.params.id);
+    try {
+      const note = notesModel.findById(req.params.id);
+      resolve(note);
+    } catch (error) {
+      reject(error());
+    }
   });
 };
 
 notes.createNote = (req, res) => {
   return new Promise((resolve, reject) => {
-    resolve("create note");
+    try {
+      const { title, content, author } = req.body;
+      const newNote = new notesModel({
+        title: title,
+        content: content,
+        author: author
+      });
+      resolve(newNote.save());
+    } catch (error) {
+      reject("error");
+    }
   });
 };
-
+//TODO: update notes
 notes.updateNote = (req, res) => {
   return new Promise((resolve, reject) => {
     resolve("update note");
@@ -25,8 +47,13 @@ notes.updateNote = (req, res) => {
 };
 
 notes.deleteNote = (req, res) => {
-  return new Promise((resolve, reject) => {
-    resolve("delete note");
+  return new Promise(async (resolve, reject) => {
+    try {
+      await notesModel.findByIdAndDelete(req.params.id);
+      resolve("note deleted");
+    } catch (error) {
+      reject(error);
+    }
   });
 };
 
