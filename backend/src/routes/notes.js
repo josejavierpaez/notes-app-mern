@@ -8,16 +8,27 @@ const {
   updateNote,
   getNote
 } = require("../controllers/notesControllers");
-router.route("/").get((req, res) => {
-  getNotes().then(notes => {
-    response.success(req, res, notes, 200);
+router
+  .route("/")
+  .get((req, res) => {
+    getNotes(req, res).then(notes => {
+      response.success(req, res, notes, 200);
+    });
+  })
+  .post((req, res) => {
+    createNote(req, res)
+      .then(notes => {
+        response.success(req, res, notes, 200);
+      })
+      .catch(error => {
+        response.error(req, res, error, 500, "error into controller");
+      });
   });
-});
 
 router
   .route("/:id")
   .get((req, res) => {
-    getNote()
+    getNote(req, res)
       .then(note => {
         response.success(req, res, note, 200);
       })
@@ -26,7 +37,7 @@ router
       });
   })
   .post((req, res) => {
-    createNote()
+    createNote(req, res)
       .then(notes => {
         response.success(req, res, notes, 200);
       })
@@ -35,7 +46,7 @@ router
       });
   })
   .put((req, res) => {
-    updateNote()
+    updateNote(req, res)
       .then(notes => {
         response.success(req, res, notes, 200);
       })
@@ -44,7 +55,7 @@ router
       });
   })
   .delete((req, res) => {
-    deleteNote()
+    deleteNote(req, res)
       .then(notes => {
         response.success(req, res, notes, 200);
       })
