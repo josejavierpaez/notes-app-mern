@@ -7,7 +7,7 @@ notes.getNotes = (req, res) => {
       const notes = notesModel.find();
       resolve(notes);
     } catch (error) {
-      reject(error);
+      reject(`error: ${error}`);
     }
   });
 };
@@ -18,7 +18,7 @@ notes.getNote = (req, res) => {
       const note = notesModel.findById(req.params.id);
       resolve(note);
     } catch (error) {
-      reject(error());
+      reject(`error: ${error}`);
     }
   });
 };
@@ -34,15 +34,16 @@ notes.createNote = (req, res) => {
       });
       resolve(newNote.save());
     } catch (error) {
-      reject("error");
+      reject(`error: ${error}`);
     }
   });
 };
-//TODO: update notes
+
 notes.updateNote = (req, res) => {
   return new Promise(async (resolve, reject) => {
     try {
       const { title, content, author } = req.body;
+      if(title == null || content == null || author == null) return reject("not null values");
       const newNote = {
         title: title,
         content: content,
@@ -51,7 +52,7 @@ notes.updateNote = (req, res) => {
       await notesModel.findByIdAndUpdate(req.params.id, newNote);
       resolve("update note");
     } catch (error) {
-      reject(error);
+      reject(`error: ${error}`);
     }
   });
 };
@@ -62,7 +63,7 @@ notes.deleteNote = (req, res) => {
       await notesModel.findByIdAndDelete(req.params.id);
       resolve("note deleted");
     } catch (error) {
-      reject(error);
+      reject(`error: ${error}`);
     }
   });
 };
