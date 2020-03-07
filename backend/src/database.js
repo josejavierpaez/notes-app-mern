@@ -9,7 +9,8 @@ if (!URI) {
 mongoose.connect(URI, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
-  useFindAndModify: false
+  useFindAndModify: false,
+  useCreateIndex: true
 });
 
 const connection = mongoose.connection;
