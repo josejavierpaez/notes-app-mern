@@ -7,20 +7,31 @@ const {
   deleteUser
 } = require("../controllers/usersControllers");
 
-router.route("/").get((req, res) => {
-  getUsers()
-    .then(users => {
-      response.success(req, res, users, 201);
-    })
-    .catch(error => {
-      response.error(req, res, error, 500, "error into controller");
-    });
-});
+router
+  .route("/")
+  .get((req, res) => {
+    getUsers()
+      .then(users => {
+        response.success(req, res, users, 201);
+      })
+      .catch(error => {
+        response.error(req, res, error, 500, "error into controller");
+      });
+  })
+  .post((req, res) => {
+    createUser(req, res)
+      .then(user => {
+        response.success(req, res, user, 200);
+      })
+      .catch(error => {
+        response.error(req, res, error, 500, "error into controller");
+      });
+  });
 
 router
   .route("/:id")
   .post((req, res) => {
-    createUser()
+    createUser(req, res)
       .then(user => {
         response.success(req, res, user, 200);
       })
@@ -29,7 +40,7 @@ router
       });
   })
   .delete((req, res) => {
-    deleteUser()
+    deleteUser(req,res)
       .then(user => {
         response.success(req, res, user, 200);
       })

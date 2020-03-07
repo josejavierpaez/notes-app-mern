@@ -2,13 +2,15 @@ const mongoose = require("mongoose");
 
 const URI = process.env.MONGODB_URI;
 
-if(!URI){
+if (!URI) {
   throw new Error("DB URI undefined");
 }
 
 mongoose.connect(URI, {
   useUnifiedTopology: true,
-  useNewUrlParser: true
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useCreateIndex: true
 });
 
 const connection = mongoose.connection;
