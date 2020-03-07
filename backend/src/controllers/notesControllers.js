@@ -14,7 +14,6 @@ notes.getNotes = (req, res) => {
 
 notes.getNote = (req, res) => {
   return new Promise((resolve, reject) => {
-    console.log(req.params.id);
     try {
       const note = notesModel.findById(req.params.id);
       resolve(note);
@@ -41,8 +40,19 @@ notes.createNote = (req, res) => {
 };
 //TODO: update notes
 notes.updateNote = (req, res) => {
-  return new Promise((resolve, reject) => {
-    resolve("update note");
+  return new Promise(async (resolve, reject) => {
+    try {
+      const { title, content, author } = req.body;
+      const newNote = {
+        title: title,
+        content: content,
+        author: author
+      };
+      await notesModel.findByIdAndUpdate(req.params.id, newNote);
+      resolve("update note");
+    } catch (error) {
+      reject(error);
+    }
   });
 };
 
