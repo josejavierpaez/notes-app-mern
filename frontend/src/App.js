@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import logo from "./logo.svg";
+//simport logo from "./logo.svg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Navigation from "./components/Navigation";
@@ -12,11 +12,12 @@ function App() {
   return (
     <Router>
       <Navigation />
-
-      <Route path="/" exact component={NotesList} />
-      <Route path="/edit/:id" component={CreateNode} />
-      <Route path="/create" component={CreateNode} />
-      <Route path="/user" component={CreateUser} />
+      <div className="container p-4">
+        <Route path="/" exact component={NotesList} />
+        <Route path="/edit/:id" component={CreateNode} />
+        <Route path="/create" component={CreateNode} />
+        <Route path="/user" component={CreateUser} />
+      </div>
     </Router>
   );
 }
